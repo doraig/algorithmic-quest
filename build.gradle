@@ -1,0 +1,30 @@
+group 'com.pigopoyo'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: "jacoco"
+
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+jacoco {
+    toolVersion = "0.7.9"
+    reportsDir = file("$buildDir/customJacocoReportDir")
+}
+jacocoTestReport {
+    reports {
+        xml.enabled false
+        csv.enabled false
+        html.destination "${buildDir}/jacocoHtml"
+    }
+}
+/*task execute(type:JavaExec) {
+    classpath  sourceSets.main.runtimeClasspath
+    main mainClass
+}*/
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
