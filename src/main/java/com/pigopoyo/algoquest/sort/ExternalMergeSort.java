@@ -4,6 +4,7 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.attribute.FileAttribute;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -12,7 +13,7 @@ import java.util.stream.Stream;
 public class ExternalMergeSort {
 
 
-    private static int MAX_TEMP_FILES = 0x400;
+    private static int MAX_TEMP_FILES = 4;
 
     final Comparator<String> comparator;
 
@@ -24,7 +25,7 @@ public class ExternalMergeSort {
         long blockSize = fileSize/MAX_TEMP_FILES;
         long memory = Runtime.getRuntime().freeMemory();
         if (blockSize < memory/2) {
-            blockSize = memory/2;
+           // blockSize = memory/2;
         }
         else if(blockSize >= memory) {
             System.err.println("Need more memory to process this sort.");
@@ -50,6 +51,7 @@ public class ExternalMergeSort {
                 currentSize += data.length();
             } else {
                 currentSize = getSaveAndCurrentSize(tmpList, paths);
+                tmpList.add(data);
             }
         }
         if (!tmpList.isEmpty()) {
@@ -63,13 +65,27 @@ public class ExternalMergeSort {
         long currentSize;
         Collections.sort(tmpList, this.comparator);
         final Path file = Files.createTempFile("temp", UUID.randomUUID().toString());
-        tmpList.stream().forEach(x -> {
+        file.toFile().deleteOnExit();
+        BufferedWriter bufferedWriter = Files.newBufferedWriter(file);
+        try {
+            tmpList.stream().forEach(x -> {
+                try {
+                    bufferedWriter.write(x);
+                    bufferedWriter.newLine();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            });
+        }
+        finally {
             try {
-                Files.write(file, x.getBytes());
+                bufferedWriter.flush();
+                bufferedWriter.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        });
+        }
         paths.add(file);
         currentSize = 0;
         tmpList.clear();
@@ -104,9 +120,12 @@ public class ExternalMergeSort {
        while (queue.size() > 0) {
            BufferedFileReader reader = queue.poll();
            String data = reader.pop();
-           if (data != null) {
+           if (data != null ) {
                bufferedWriter.write(data);
-               queue.add(reader);
+               bufferedWriter.newLine();
+               if (!reader.empty()) {
+                   queue.add(reader);
+               }
            }
            else {
                reader.close();
@@ -141,8 +160,24 @@ public class ExternalMergeSort {
 
         public void close() throws IOException {
             this.file.close();
-            this.path.toFile().delete();
+            Files.delete(this.path);
 
         }
+
+        public boolean empty() throws IOException {
+            return (currentval = file.readLine()) == null;
+        }
+    }
+
+    /**
+     * Starting point for the JVM.
+     */
+    public static void main(String argument[]) throws IOException {
+            new ExternalMergeSort(new Comparator<String>() {
+                @Override
+                public int compare(String o1, String o2) {
+                    return o1.compareTo(o2);
+                }
+            }).sortAndMerge(Paths.get("C:\\dev\\text.txt").toFile());
     }
 }
