@@ -14,20 +14,18 @@ public class ReadHugeFile {
 
     void readFile(String fileName) throws IOException {
 
-        BufferedInputStream bufferedInputStream = new BufferedInputStream(new FileInputStream(fileName));
-        byte[] bytes = new byte[1024*1024*10];
-        bufferedInputStream.read(bytes);
-        System.out.println(new String(bytes));
-       /* Scanner scanner = new Scanner(new FileInputStream(fileName));
+        try (Scanner scanner = new Scanner(new FileInputStream(fileName))) {
 
-        while (scanner.hasNextLine()) {
-            System.out.println(scanner.nextLine());
-        }*/
+
+            while (scanner.hasNextLine()) {
+                System.out.println(scanner.nextLine());
+            }
+        }
 
     }
 
     public static void main(String args[]) throws IOException {
-            new ReadHugeFile().readFile("C:\\Users\\zenmaster\\Downloads\\file\\file.xml");
+            new ReadHugeFile().readFile("file.xml");
     }
 
 
