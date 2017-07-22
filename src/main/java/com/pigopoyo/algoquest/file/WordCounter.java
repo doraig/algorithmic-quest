@@ -2,6 +2,8 @@ package com.pigopoyo.algoquest.file;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;
@@ -49,7 +51,7 @@ public class WordCounter {
     private Supplier<Stream<String>> getStreamSupplier(String filename) throws IOException {
         return () -> {
             try {
-                return Files.lines(Paths.get(filename));
+                return Files.lines(Paths.get(filename), StandardCharsets.ISO_8859_1);
             } catch (IOException e) {
                 e.printStackTrace();
             }
