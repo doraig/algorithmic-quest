@@ -1,4 +1,4 @@
-package com.pigopoyo.funprog;
+package com.pigopoyo.funprog.auto;
 
 import java.awt.*;
 import java.util.Random;
