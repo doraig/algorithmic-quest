@@ -20,7 +20,7 @@ public class Array2DJoin {
      * @return
      */
     public String[][] joinArrayData(String[][] menus, String[][] preference) {
-        Stream<String[]> menuStream =  Arrays.stream(menus);
+       /* Stream<String[]> menuStream =  Arrays.stream(menus);
 
         //x -> {x.length()} == gopi(String x) { x.length() }
         Map<String, List<String>> menuMap = menuStream.collect(Collectors.toMap(x -> x[0],
@@ -29,8 +29,8 @@ public class Array2DJoin {
         List<String[]> returnList = new ArrayList<>();
         for (String[] rec : preference) {
             returnList.addAll(menuMap.get(rec[0].trim()).stream().map(x -> new String[]{rec[1],x}).collect(Collectors.toList()));
-        }
-        return returnList.stream().toArray(String[][]::new);
+        }*/
+        return null;//returnList.stream().toArray(String[][]::new);
     }
 
     private static  List<String> buildList(String[] v) {

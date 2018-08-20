@@ -1,3 +1,5 @@
-build 
+build
 .gradle
 .idea
+**/sso*.properties
+**/*.jasper

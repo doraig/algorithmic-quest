@@ -8,8 +8,8 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.Supplier;
-import java.util.stream.Stream;
+//import java.util.function.Supplier;
+//import java.util.stream.Stream;
 
 
 public class WordCounter {
@@ -39,15 +39,16 @@ public class WordCounter {
     }
 
     void wordCount(String filename) throws IOException {
-        long mill = System.currentTimeMillis();
+        /*long mill = System.currentTimeMillis();
         Supplier<Stream<String>> stringStream = getStreamSupplier(filename);
         long lines = stringStream.get().count();
         long count = stringStream.get().mapToLong(line -> line.split("\\s+").length).sum();
         long chars = stringStream.get().mapToLong(line -> line.length()).sum();
         System.out.println("\t"+lines + "\t" + count + "\t"+chars + "\t" + filename.substring(filename.lastIndexOf(File.separator)+1));
-
+*/
     }
 
+/*
     private Supplier<Stream<String>> getStreamSupplier(String filename) throws IOException {
         return () -> {
             try {
@@ -57,7 +58,8 @@ public class WordCounter {
             }
             return null;
         };
+*/
 
-    }
+    //}
 
 }

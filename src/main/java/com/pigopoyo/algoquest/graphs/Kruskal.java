@@ -41,9 +41,9 @@ public class Kruskal {
         Set<Integer> visitedVertices = new HashSet<>();
         Set<EdgeInfo> spanningTree = new HashSet<>();
         Map<Integer, Set<Integer>> edgeMap = new HashMap<>();
-        for (int v = 0; v < graph.getNumVertices(); v++) {
+       /* for (int v = 0; v < graph.getNumVertices(); v++) {
             edgeMap.put(v, new HashSet<>());
-        }
+        }*/
 
         while(!queue.isEmpty() && spanningTree.size() < graph.getNumVertices() - 1) {
             EdgeInfo currentEdge = queue.poll();

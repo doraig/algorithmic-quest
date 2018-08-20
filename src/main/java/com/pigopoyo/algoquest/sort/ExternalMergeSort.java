@@ -67,7 +67,7 @@ public class ExternalMergeSort {
         final Path file = Files.createTempFile("temp", UUID.randomUUID().toString());
         file.toFile().deleteOnExit();
         BufferedWriter bufferedWriter = Files.newBufferedWriter(file);
-        try {
+     /*   try {
             tmpList.stream().forEach(x -> {
                 try {
                     bufferedWriter.write(x);
@@ -86,7 +86,7 @@ public class ExternalMergeSort {
                 e.printStackTrace();
             }
         }
-        paths.add(file);
+     */   paths.add(file);
         currentSize = 0;
         tmpList.clear();
         return currentSize;
@@ -105,6 +105,7 @@ public class ExternalMergeSort {
                return 0;
            }
        });
+/*
 
        paths.stream().map(x -> {
            try {
@@ -114,6 +115,7 @@ public class ExternalMergeSort {
            }
            return null;
        }).forEach(x -> queue.add(x));
+*/
        Path output = Paths.get("./Outpout.txt");
        BufferedWriter bufferedWriter = Files.newBufferedWriter(output);
 

@@ -11,7 +11,7 @@ public class BridFrequency {
     static int migratoryBirds(int n, int[] ar) {
 
         int countarr[]  = new int[6];
-        IntStream.range(0, countarr.length).forEach(i -> countarr[i]=0);
+       /* IntStream.range(0, countarr.length).forEach(i -> countarr[i]=0);
         Arrays.stream(ar).forEach(x -> countarr[x]++);
         Stack<Integer> integerStack = new Stack<>();
         IntStream.range(1, countarr.length).forEach(i ->  {
@@ -22,7 +22,7 @@ public class BridFrequency {
                integerStack.push(countarr[i]);
                countarr[0] = i;
             }
-        });
+        });*/
         return countarr[0];
 
     }

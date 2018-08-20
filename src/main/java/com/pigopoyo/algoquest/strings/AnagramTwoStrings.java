@@ -18,7 +18,7 @@ public class AnagramTwoStrings {
     public List<Integer> findAnagramIndices(String pHaystack, String qNeedle) {
 
         int[] hash = new int[256];
-        qNeedle.chars().forEach(value -> hash[value]++);
+      /*  qNeedle.chars().forEach(value -> hash[value]++);
         int count = qNeedle.length();
         List<Integer> integers =  new ArrayList<>();
         for (int left = 0,right = 0; right < pHaystack.length();) {
@@ -33,9 +33,9 @@ public class AnagramTwoStrings {
                 count++;
             }
 
-        }
+        }*/
 
-        return integers;
+        return null;
     }
 
 

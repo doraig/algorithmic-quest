@@ -22,10 +22,10 @@ public class SimpleByteAccess {
         byte[] data = "A".getBytes();
         System.out.println(data.length);
         System.out.println((float) Runtime.getRuntime().freeMemory()/1024/1024/1024);
-        byte[][] obj = new ArrayList<String>(){{add("sample");add("test");}}.stream().map(x -> x.getBytes()).toArray(byte[][]::new);
+      //  byte[][] obj = new ArrayList<String>(){{add("sample");add("test");}}.stream().map(x -> x.getBytes()).toArray(byte[][]::new);
         //Arrays.stream(obj).toArray(byte[]::new);
         String[][] a = new String[][]{{"a","b"},{"c","d"}};
-        System.out.println(obj.length);
+        //System.out.println(obj.length);
         return null;
     }
 }
